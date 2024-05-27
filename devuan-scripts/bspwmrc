@@ -1,0 +1,33 @@
+#! /bin/sh
+
+# Activate the inputs from sxhkd
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# Configure monitors to be used in bspwm with xrandr
+# Example: xrandr --output LVDS-1 --mode 1366x768 --orientation normal
+# (LVDS1 usually refers to the laptops inbuilt monitor. Other monitors will use the name of their connection, such as HDMI or VGA)
+
+# Configure the amount workspaces per monitor
+
+bspc monitor VGA1 -d I II III IV V VI VII VIII IX X
+
+# Configure window gaps, border width, focused and normal border colors
+
+bspc config border_width         1
+bspc config window_gap          12
+bspc config focused_border_color '#xxyyzz'
+bspc config normal_border_color '#xxyyzz'
+
+# Configure split ratio and allow for borderless/gapless monocle
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# Configure autostart applications to launch with bspwm
+
+numlockx &
+picom &
+xsetroot -cursor_name left_ptr &
+polkit-gnome-authentication-agent-1 &
